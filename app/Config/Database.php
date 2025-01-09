@@ -27,9 +27,9 @@ class Database extends Config
     public $default = [
         'DSN'      => '',
        'hostname' => 'localhost',
-'username' => 'root', // Replace 'root' with your actual username
-'password' => '',    // Replace with your database password
-'database' => 'ems', // Replace 'ems' with your database name
+'username' => 'root', 
+'password' => '',    
+'database' => 'ems', 
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
