@@ -63,12 +63,14 @@ export default function Register() {
             "Content-Type": "application/json",
           },
           withCredentials: true,
+          credentials: 'include',
+          
         }
       );
 
       if (response.data.success) {
         setMessage("Registration successful");
-        navigate("/success");
+        navigate("/");
       } else {
         setErrors(response.data.errors || ["Registration failed"]);
       }
@@ -84,7 +86,7 @@ export default function Register() {
         style={{ maxWidth: "400px" }}
       >
         <h2 className="text-center text-primary mb-4">Register</h2>
-        <form onSubmit={handleSubmit}>
+        <form action="http://localhost:8080/users/register" method="POST">
           <div className="row mb-3">
             <div className="col">
               <label htmlFor="nom" className="form-label">
