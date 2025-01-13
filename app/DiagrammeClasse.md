@@ -37,3 +37,56 @@ classDiagram
     %% Cardinalités
     User "1" --> "1" Account : "possède un"
     Account "1" --> "1" Role : "a un rôle"
+
+
+
+ ```mermaid
+ classDiagram
+    class SaisieNote {
+        +int id
+        +int idProfesseur
+        +int idModule
+        +Date dateSaisie
+        +validerNote()
+        +annulerSaisie()
+    }
+
+    class Etudiant {
+        +int id
+        +string nom
+        +string prenom
+        +string cne
+        +Date dateNaissance
+        +getNotes()
+    }
+
+    class Professeur {
+        +int id
+        +string nom
+        +string prenom
+        +string cin
+        +assignerNote()
+    }
+
+    class Module {
+        +int id
+        +string nom
+        +int coefficient
+        +getExams()
+    }
+
+    class Note {
+        +int id
+        +int valeur
+        +Date dateNote
+        +int idEtudiant
+        +int idModule
+        +saisirNote()
+    }
+
+    Professeur "1" --> "*" SaisieNote : valide
+    Etudiant "1" --> "*" Note : a
+    Module "1" --> "*" Note : contient
+    Module "1" --> "*" SaisieNote : concerne
+    SaisieNote "1" --> "*" Note : saisie
+
