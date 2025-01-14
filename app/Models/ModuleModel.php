@@ -6,30 +6,50 @@ use CodeIgniter\Model;
 
 class ModuleModel extends Model
 {
-    protected $table = 'module';
+    protected $table      = 'module';
     protected $primaryKey = 'id';
-    protected $useAutoIncrement = true;
-    protected $returnType = 'array';
 
-    protected $allowedFields = ['nom', 'description'];
+    // Define the allowed fields
+    protected $allowedFields = ['nom', 'description', 'idSector'];
 
+    // Define the timestamps if necessary
     protected $useTimestamps = true;
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
+    // Define validation rules (if necessary)
     protected $validationRules = [
-        'nom' => 'required|min_length[3]|max_length[100]',
-        'description' => 'permit_empty|max_length[255]',
+        'nom' => 'required|string|max_length[100]',
+        'idSector' => 'required|integer',
     ];
 
     protected $validationMessages = [
         'nom' => [
-            'required' => 'Le nom du module est obligatoire',
-            'min_length' => 'Le nom doit avoir au moins 3 caractères',
-            'max_length' => 'Le nom ne doit pas dépasser 100 caractères',
+            'required' => 'The module name is required.',
+            'string'   => 'The module name must be a string.',
         ],
-        'description' => [
-            'max_length' => 'La description ne doit pas dépasser 255 caractères',
+        'idSector' => [
+            'required' => 'The sector ID is required.',
+            'integer'  => 'The sector ID must be an integer.',
         ],
     ];
+
+
+    public function getModulesBySectorUser($idUser, $idSector) {
+		$modules = $this->db->table($this->table);
+        $modules->join('usermodule', 'module.id = usermodule.idModule');
+        $modules->where('module.idSector', $idSector);
+        $modules->where('usermodule.idUser', session()->get('user_id'));
+        //$modules->where('usermodule.type', 'professor');
+        
+        // Get the result as an array
+        return $modules->get()->getResultArray();
+    }
+
+    public function getModuleById($idModule) {
+		
+        return $this->where('id', $idModule)->first();
+    }
+
+    
 }

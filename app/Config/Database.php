@@ -26,10 +26,17 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
+<<<<<<< HEAD
        'hostname' => 'localhost',
 'username' => 'root', 
 'password' => '',    
 'database' => 'ems', 
+=======
+        'hostname' => 'localhost',
+        'username' => 'root', // Utilisateur de la base de données
+        'password' => 'root', // Mot de passe de l'utilisateur
+        'database' => 'ems', // Nom de la base de données
+>>>>>>> f12b7a5104365b7a3e2f984cdc812c75b3155aff
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
