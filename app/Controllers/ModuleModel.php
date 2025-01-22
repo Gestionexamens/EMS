@@ -13,11 +13,9 @@ class ModuleController extends Controller
     {
         $this->moduleModel = new ModuleModel();
     }
-
-    // Récupérer et afficher les noms des modules
-    public function getModuleNames()
+           public function getModuleNames()
     {
-        $modules = $this->moduleModel->select('nom')->findAll(); // Récupère uniquement le champ "nom"
+        $modules = $this->moduleModel->select('nom')->findAll(); 
         
         if (empty($modules)) {
             return $this->response->setJSON([
